@@ -1,3 +1,4 @@
+import requests
 import streamlit as st
 import streamlit.components.v1 as components
 import lyricsgenius
@@ -34,7 +35,20 @@ if searched_lyric:
         lyric_search_results = genius.search_lyrics(searched_lyric)
 
         list_of_songs = []
-        for lyric in lyric_search_results["sections"][0]['hits']:
+        # for lyric in lyric_search_results["sections"][0]['hits']:
+        #     artist_name = lyric['result']['artist_names']
+        #     song_title = lyric['result']['title']
+        #     lyric_ranges = lyric['highlights'][0]['ranges']
+        #     lyric_samples = lyric['highlights'][0]['value']
+        url = f"https://genius.com/api/search/lyrics?q={searched_lyric}"
+
+        response = requests.get(url)
+
+        json_response = response.json()
+
+        # print(json_response)
+
+        for lyric in json_response["response"]["sections"][0]['hits']:
             artist_name = lyric['result']['artist_names']
             song_title = lyric['result']['title']
             lyric_ranges = lyric['highlights'][0]['ranges']
@@ -43,9 +57,10 @@ if searched_lyric:
             result = spotifyObject.search(q=f"{song_title} {artist_name}")
             try:
                 song_uri = result['tracks']['items'][0]['uri']
+                list_of_songs.append(song_uri)
             except:
                 pass
-            list_of_songs.append(song_uri)
+
 
         # find the new playlist
         prePlaylist = spotifyObject.user_playlists(user=username)
