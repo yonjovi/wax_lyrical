@@ -3,3 +3,5 @@ spotifyApi.py
 yonosecrets.py
 ./streamlit
 publicgenius.py
+newmethod.py
+backup_spotty_playlist.py
