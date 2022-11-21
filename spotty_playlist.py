@@ -8,13 +8,13 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 import time
 import json
 
 opt = Options()
 opt.add_argument("--headless")
-driver_service = Service(executable_path="/Users/yonatanrotem/Documents/Development/chromedriver")
-# driver_service = Service(executable_path=ChromeDriverManager().install())
+driver_service = Service(executable_path=ChromeDriverManager().install())
 driver = webdriver.Chrome(service=driver_service, options=opt)
 
 scope = 'playlist-modify-public'
