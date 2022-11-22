@@ -5,18 +5,22 @@ import streamlit.components.v1 as components
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 import time
 import json
+import os
+import sys
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.service import Service
+from webdriver_manager.firefox import GeckoDriverManager
 
 opt = Options()
 opt.add_argument("--headless")
-driver_service = Service(executable_path=ChromeDriverManager().install())
-driver = webdriver.Chrome(service=driver_service, options=opt)
-
+driver_service = Service(GeckoDriverManager().install())
+driver = webdriver.Firefox(
+    options=opt,
+    service=driver_service,
+)
 scope = 'playlist-modify-public'
 username = st.secrets['username']
 
