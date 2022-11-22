@@ -55,6 +55,7 @@ if searched_lyric:
         driver.get(url)
         soup = BeautifulSoup(driver.page_source, 'html')
         driver.quit()
+        print(soup.get_text())
         json_response = json.loads(soup.get_text())
         # print(json_response)
 
