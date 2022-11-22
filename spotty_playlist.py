@@ -13,7 +13,6 @@ from selenium.webdriver.firefox.service import Service
 from webdriver_manager.firefox import GeckoDriverManager
 from fake_useragent import UserAgent
 
-
 opt = Options()
 opt.add_argument("--headless")
 opt.add_argument("--incognito")
