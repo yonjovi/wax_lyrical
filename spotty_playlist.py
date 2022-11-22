@@ -22,6 +22,8 @@ opt.add_argument("--window-size=1280,1280")
 opt.add_argument("--no-sandbox")
 opt.add_argument("--enable-javascript")
 opt.add_argument('--disable-blink-features=AutomationControlled')
+opt.page_load_strategy = "eager"
+opt.add_argument("lang = en_us")
 opt.set_preference("general.useragent.override", UserAgent().random)
 
 # ua = UserAgent()
