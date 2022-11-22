@@ -53,7 +53,7 @@ if searched_lyric:
         url = f"https://genius.com/api/search/lyrics?q={searched_lyric}"
 
         driver.get(url)
-        soup = BeautifulSoup(driver.page_source, 'lxml')
+        soup = BeautifulSoup(driver.page_source, 'html')
         driver.quit()
         print(soup.get_text())
         json_response = json.loads(soup.get_text())
