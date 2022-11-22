@@ -7,8 +7,6 @@ from spotipy.oauth2 import SpotifyOAuth
 from bs4 import BeautifulSoup
 import time
 import json
-import os
-import sys
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
@@ -16,6 +14,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 
 opt = Options()
 opt.add_argument("--headless")
+opt.add_argument("--enable-javascript")
 driver_service = Service(GeckoDriverManager().install())
 driver = webdriver.Firefox(
     options=opt,
