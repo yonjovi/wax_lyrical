@@ -11,15 +11,30 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
 from webdriver_manager.firefox import GeckoDriverManager
+from fake_useragent import UserAgent
+
 
 opt = Options()
 opt.add_argument("--headless")
+opt.add_argument("--incognito")
+opt.add_argument("--nogpu")
+opt.add_argument("--disable-gpu")
+opt.add_argument("--window-size=1280,1280")
+opt.add_argument("--no-sandbox")
 opt.add_argument("--enable-javascript")
+opt.add_argument('--disable-blink-features=AutomationControlled')
+
+ua = UserAgent()
+userAgent = ua.random
+
 driver_service = Service(GeckoDriverManager().install())
 driver = webdriver.Firefox(
     options=opt,
     service=driver_service,
 )
+driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": userAgent})
+
 scope = 'playlist-modify-public'
 username = st.secrets['username']
 
