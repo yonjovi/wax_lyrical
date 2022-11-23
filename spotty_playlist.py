@@ -8,34 +8,31 @@ from bs4 import BeautifulSoup
 import time
 import json
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.service import Service
-from webdriver_manager.firefox import GeckoDriverManager
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from fake_useragent import UserAgent
+from webdriver_manager.chrome import ChromeDriverManager
 
 opt = Options()
-opt.add_argument("--headless")
+opt.add_argument('--headless')
 opt.add_argument("--incognito")
 opt.add_argument("--nogpu")
 opt.add_argument("--disable-gpu")
 opt.add_argument("--window-size=1280,1280")
 opt.add_argument("--no-sandbox")
 opt.add_argument("--enable-javascript")
+opt.add_experimental_option("excludeSwitches", ["enable-automation"])
+opt.add_experimental_option('useAutomationExtension', False)
 opt.add_argument('--disable-blink-features=AutomationControlled')
-opt.page_load_strategy = "eager"
-opt.add_argument("lang = en_us")
-opt.set_preference("general.useragent.override", UserAgent().random)
+# opt.set_preference("general.useragent.override", UserAgent().random)
 
-# ua = UserAgent()
-# userAgent = ua.random
+ua = UserAgent()
+userAgent = ua.random
 
-driver_service = Service(GeckoDriverManager().install())
-driver = webdriver.Firefox(
-    options=opt,
-    service=driver_service,
-)
-# driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-# driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": userAgent})
+driver_service = Service(executable_path=ChromeDriverManager().install())
+driver = webdriver.Chrome(service=driver_service, options=opt)
+driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": userAgent})
 
 scope = 'playlist-modify-public'
 username = st.secrets['username']
