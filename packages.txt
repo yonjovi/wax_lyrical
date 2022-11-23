@@ -1,4 +1,10 @@
-firefox-esr
 chromium
 chromium-driver
-chromium-chromedriver
+apt update
+apt-cache search chrome
+apt-cache search chromium
+apt-cache search firefox
+apt-cache search firefox-geckodriver
+apt-cache search geckodriver
+apt-cache search chromedriver
+cat /etc/apt/sources.list
