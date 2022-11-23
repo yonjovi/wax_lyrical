@@ -1,9 +1,2 @@
 chromium
 chromium-driver
-apt update
-apt-cache search chrome
-apt-cache search chromium
-apt-cache search firefox
-apt-cache search firefox-geckodriver
-apt-cache search geckodriver
-apt-cache search chromedriver
